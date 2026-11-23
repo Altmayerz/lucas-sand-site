@@ -1,0 +1,127 @@
+/* Tokens da Tona. As cores são papéis (fundo, painel, tinta, pele, bloco...), nunca o nome da cor: ?tema= troca a
+   paleta inteira. A letra do logotipo também é um papel (--marca), com as métricas dela logo abaixo.
+   Duas unidades de desenho:
+   --u   a escala de cena (hero e fecho): 1 px de um quadro de 1440 × 900, acompanha a tela nos dois eixos;
+   --su  a escala de site (seções comuns): 1 px de verdade a partir de 1280 de largura, só encolhe abaixo disso. */
+
+:root {
+  /* paleta "pele" (padrão): branco quente, tinta café, blocos em tons de pele */
+  --fundo: #fbfaf7;
+  --painel: #f0ebe4; /* o painel do hero, nas bordas */
+  --painel-luz: #fdfcfa; /* e no meio, onde a luz bate */
+  --superficie: #f3efe9; /* cartões de texto, listas */
+  --tinta: #201814;
+  --tinta-rgb: 32 24 20;
+  --claro: #ffffff; /* letra sobre foto e sobre bloco */
+  --claro-rgb: 255 255 255;
+  --pele-1: #edd8c7;
+  --pele-2: #d9ab8b;
+  --pele-3: #b97d5c;
+  --pele-3-rgb: 185 125 92;
+  --pele-4: #8f593d;
+  --pele-5: #3d251b;
+  --bloco: #9a6245; /* o bloco de cor do fecho e os cartões de cor */
+  --bloco-rgb: 154 98 69;
+  --cta: #201814;
+  --sobre-cta: #ffffff;
+  /* o vidro fosco (a névoa parada no pé das fotos): leitoso e neutro, nunca tingido nem escuro. --vidro é a cor
+     do leite, --veu o quanto ele cobre onde mora a letra, --grao a força da geada (o leite granulado) e
+     --grao-bloco a da geada nos blocos de cor chapada. A letra que mora no vidro é a tinta. */
+  --vidro: #ffffff;
+  --veu: 0.46;
+  --grao: 0.42;
+  --grao-bloco: 0.07;
+  --grao-tam: 96px; /* o ladrilho tem 192 pontos: dois por pixel de CSS */
+
+  --u: min(calc(100vw / 1440), calc(100svh / 900), 1.5px);
+  --su: min(1px, calc(100vw / 1280));
+  --ms: max(24px, calc(40 * var(--su))); /* margem lateral das seções */
+  --largura: 1200px; /* largura do conteúdo */
+  --raio: calc(28 * var(--su)); /* cantos dos cartões e das fotos */
+  --vao: calc(16 * var(--su)); /* vão entre cartões */
+  --secao: calc(140 * var(--su)); /* folga entre seções */
+
+  --marca: 'Shrikhand', 'Cooper Black', Georgia, serif;
+  --marca-peso: 400;
+  --marca-estilo: normal;
+  --marca-ajuste: 1; /* corpo relativo: letras mais largas pedem menos */
+  /* métricas da letra da marca, em em (medidas na fonte; trocou a letra, meça de novo):
+     -desce  quanto a caixa da linha (entrelinha 1) passa abaixo da linha de base;
+     -esp    espaço entre letras que iguala a tinta de "To" e de "na" (soma em "To", tira de "na");
+     -fim-a  sobra de caixa à direita do "o"; -ini-b  quanto a tinta do "n" começa antes da caixa. */
+  --marca-desce: 0.2;
+  --marca-esp: 0.026;
+  --marca-fim-a: 0.004;
+  --marca-ini-b: 0.02;
+  --sans: 'DM Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  /* curvas e tempos da casa (os mesmos do motion, em CSS) */
+  --out: cubic-bezier(0.22, 1, 0.36, 1);
+  --io: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-s: 0.32s;
+  --dur-m: 0.7s;
+  --dur-l: 1.2s;
+}
+
+html[data-tema='rosa'] {
+  --fundo: #fcf9f8;
+  --painel: #f3e7e4;
+  --painel-luz: #fefcfb;
+  --superficie: #f6edea;
+  --tinta: #2a1719;
+  --tinta-rgb: 42 23 25;
+  --pele-1: #f1d9d5;
+  --pele-2: #e0b0aa;
+  --pele-3: #c4847f;
+  --pele-3-rgb: 196 132 127;
+  --pele-4: #9b5b5a;
+  --pele-5: #452224;
+  --bloco: #a86463;
+  --bloco-rgb: 168 100 99;
+  --cta: #2a1719;
+}
+html[data-tema='oliva'] {
+  --fundo: #fafaf6;
+  --painel: #e9ebe1;
+  --painel-luz: #fcfcf9;
+  --superficie: #eff0e8;
+  --tinta: #1b1f17;
+  --tinta-rgb: 27 31 23;
+  --pele-1: #dde2d0;
+  --pele-2: #b9c2a2;
+  --pele-3: #8b9870;
+  --pele-3-rgb: 139 152 112;
+  --pele-4: #5f6c48;
+  --pele-5: #262d1c;
+  --bloco: #66734c;
+  --bloco-rgb: 102 115 76;
+  --cta: #1b1f17;
+}
+html[data-tema='noite'] {
+  --fundo: #fafaf9;
+  --painel: #ecebe8;
+  --painel-luz: #fdfdfc;
+  --superficie: #f1f0ed;
+  --tinta: #161514;
+  --tinta-rgb: 22 21 20;
+  --pele-1: #e3e0db;
+  --pele-2: #bdb7ae;
+  --pele-3: #8b847a;
+  --pele-3-rgb: 139 132 122;
+  --pele-4: #4d4842;
+  --pele-5: #1b1917;
+  --bloco: #23211f;
+  --bloco-rgb: 35 33 31;
+  --cta: #161514;
+}
+
+@media (max-width: 899px) {
+  :root {
+    --u: calc(100vw / 390);
+    --su: min(1px, calc(100vw / 390));
+    --ms: 20px;
+    --raio: 22px;
+    --vao: 12px;
+    --secao: 88px;
+  }
+}

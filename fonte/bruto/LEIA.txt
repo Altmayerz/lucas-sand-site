@@ -1,0 +1,13 @@
+Aqui entram as fotos de origem, sempre em PNG, com o mesmo nome do prompt de arquivos/receitas/prompts/:
+  hero-d.png                                   a modelo do hero (3:2 deitada, busto de frente, fundo de estúdio liso e claro): sai recortada
+  entre.png                                    a mulher do fecho (2:3 em pé, da cintura para cima, fundo liso e claro): sai recortada
+  macro-rosto.png (3:2)  macro-labios.png (1:1)  macro-ombro.png (4:5)     as três peles do bento (viço, medida, firmeza)
+  maos.png (4:5)                               a limpeza de pele (o cartão do protocolo e o cartão do hero)
+  area-rosto.png area-corpo.png area-cabelo.png (3:4)                      as três abas de tratamentos
+  madura.png (3:2)                             o painel 50+ (a pessoa no terço da direita, parede lisa no resto)
+  clinica-recepcao.png clinica-cuidado.png (3:2)                           a fila da clínica, as deitadas
+  clinica-sala.png clinica-detalhe.png clinica-espera.png (4:5)            a fila da clínica, as de pé
+  equipe-1.png equipe-2.png equipe-3.png (4:5)                             as três fichas da equipe
+Fora do macOS, o recorte do hero e do fecho é feito antes, com qualquer removedor de fundo, e salvo aqui ao lado da
+foto como hero-d-recorte.png e entre-recorte.png (PNG de fundo transparente, do mesmo tamanho da foto).
+Depois, da raiz do projeto: npm run imagens   (ver arquivos/receitas/LEIA.md)

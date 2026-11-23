@@ -1,0 +1,114 @@
+/* Fecho: o nome gigante, de novo partido em duas metades, numa faixa clara; embaixo, o bloco de cor. A mulher
+   recortada fica em cima da divisa: a cabeça entre as metades do nome, o corpo sobre o bloco, e o cartão de
+   agendamento por cima dela. Medidas da cena em --u, como no hero; o cartão e o rodapé, em --su. */
+.agendar {
+  position: relative;
+  padding: calc(var(--secao) * 0.4) 12px 12px;
+  --corpo-nome: calc(384 * var(--u) * var(--marca-ajuste));
+  --miolo: calc(176 * var(--u));
+  --mulher-h: calc(770 * var(--u));
+  --mulher-w: calc(var(--mulher-h) * 836 / 1405);
+  --alto: calc(372 * var(--u)); /* a altura da faixa clara: até o peito dela */
+  --cobre: calc(86 * var(--u)); /* quanto o cartão cobre do pé da foto */
+  overflow: clip;
+}
+.agendar__alto { position: relative; height: var(--alto); }
+.agendar__nome { position: absolute; inset: 0; color: var(--tinta); font-size: var(--corpo-nome); line-height: 1; white-space: nowrap; user-select: none; }
+.agendar__metade { position: absolute; bottom: calc(96 * var(--u)); display: block; transform: translate3d(calc(var(--desliza, 0) * 1px), 0, 0); will-change: transform; }
+.agendar__metade > span { display: block; margin-bottom: calc(var(--marca-desce) * -1em); }
+.agendar__metade--a { right: calc(50% + var(--miolo) / 2); letter-spacing: calc(var(--marca-esp) * 1em); margin-right: calc((var(--marca-fim-a) - var(--marca-esp)) * 1em); }
+.agendar__metade--b { left: calc(50% + var(--miolo) / 2); letter-spacing: calc(var(--marca-esp) * -1em); margin-left: calc(var(--marca-ini-b) * 1em); }
+
+.agendar__bloco {
+  position: relative;
+  border-radius: 32px;
+  background: var(--bloco);
+  color: var(--claro);
+  padding: calc(var(--mulher-h) - var(--alto) - var(--cobre)) calc(40 * var(--su)) calc(34 * var(--su));
+  isolation: isolate;
+}
+.agendar__bloco::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: url('/img/grao.png') 0 0 / var(--grao-tam) var(--grao-tam);
+  opacity: var(--grao-bloco);
+  pointer-events: none;
+}
+.agendar__mulher {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: calc(var(--alto) * -1);
+  width: var(--mulher-w);
+  max-width: none;
+  height: var(--mulher-h);
+  margin-left: calc(var(--mulher-w) / -2);
+  transform: translate3d(0, calc(var(--sobe, 0) * 1px), 0);
+  will-change: transform;
+  pointer-events: none;
+}
+.agendar__cartao {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: calc(48 * var(--su));
+  align-items: end;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: calc(48 * var(--su));
+  border-radius: var(--raio);
+  background: var(--fundo);
+  color: var(--tinta);
+  box-shadow: 0 40px 80px -40px rgb(var(--tinta-rgb) / 0.5);
+}
+.agendar__chamada { display: grid; gap: calc(20 * var(--su)); justify-items: start; }
+.agendar__titulo { font-size: calc(78 * var(--su)); line-height: 1; font-weight: 500; letter-spacing: -0.042em; text-wrap: balance; }
+.agendar__titulo .marca-letra { font-size: 0.93em; letter-spacing: -0.01em; color: var(--pele-4); white-space: nowrap; }
+.agendar__chamada .corpo { max-width: 40ch; }
+.agendar__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 6px; }
+.agendar__acoes .pequeno { color: rgb(var(--tinta-rgb) / 0.6); }
+.agendar__dados { display: grid; gap: 0; margin: 0; }
+.agendar__dados > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-top: 1px solid rgb(var(--tinta-rgb) / 0.12); }
+.agendar__dados dt { font-size: 14px; color: rgb(var(--tinta-rgb) / 0.58); padding-top: 2px; }
+.agendar__dados dd { font-size: 16px; line-height: 1.5; letter-spacing: -0.008em; }
+
+.rodape {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 32px;
+  max-width: var(--largura);
+  margin: calc(34 * var(--su)) auto 0;
+}
+.rodape__marca { font-size: 40px; line-height: 1; padding: 4px 0 6px; transition: transform var(--dur-s) var(--out); }
+:where(html:not(.is-scrolling):not(.toque)) .rodape__marca:hover { transform: rotate(-4deg) scale(1.04); }
+.rodape__marca:active { transform: scale(0.95); }
+.rodape__menu { display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: 15px; }
+.rodape__legal { opacity: 0.82; text-align: right; max-width: 40ch; }
+.rodape :focus-visible { outline-color: var(--claro); }
+
+/* Celular: o nome inteiro, de ponta a ponta, atrás da cabeça dela (como no hero) */
+@media (max-width: 899px) {
+  .agendar {
+    padding: 36px 8px 8px;
+    --corpo-nome: calc(131 * var(--u) * var(--marca-ajuste));
+    --mulher-h: calc(500 * var(--u));
+    --alto: calc(232 * var(--u));
+    --cobre: calc(56 * var(--u));
+  }
+  .agendar__nome { display: flex; justify-content: center; align-items: flex-end; padding-bottom: calc(var(--alto) - 34 * var(--u) - var(--corpo-nome) * 0.1); }
+  .agendar__metade { position: static; margin: 0; letter-spacing: 0; transform: none; }
+  .agendar__bloco { border-radius: 24px; padding-left: 10px; padding-right: 10px; padding-bottom: 26px; }
+  .agendar__cartao { grid-template-columns: 1fr; gap: 26px; padding: 24px 20px; }
+  .agendar__titulo { font-size: 44px; }
+  .agendar__acoes .botao { width: 100%; justify-content: space-between; }
+  .agendar__dados > div { grid-template-columns: 92px minmax(0, 1fr); padding: 14px 0; }
+  .rodape { grid-template-columns: 1fr; gap: 18px; margin-top: 26px; padding: 0 10px; }
+  .rodape__legal { text-align: left; }
+}

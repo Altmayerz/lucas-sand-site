@@ -1,0 +1,219 @@
+/* Hero: um painel claro de cantos redondos, o nome gigante partido em duas metades iguais (to · na) e a modelo no
+   meio, na frente das letras. Medidas em --u (um quadro de 1440 × 900): a figura e o nome se ancoram no pé e no
+   meio do painel; os textos, nos cantos. */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  padding: 12px;
+  --foto-h: calc(764 * var(--u));
+  --foto-w: calc(var(--foto-h) * var(--hero-foto-w) / var(--hero-foto-h));
+  --foto-desce: calc(34 * var(--u)); /* quanto a foto passa do pé do painel (a cabeça fica à altura do nome) */
+  --corpo-nome: calc(384 * var(--u) * var(--marca-ajuste));
+  --miolo: calc(188 * var(--u)); /* o vão entre as duas metades do nome: menor que a cabeça, as letras entram atrás dela */
+  --nome-pe: calc(324 * var(--u)); /* do pé do painel à linha de base das letras (a altura do queixo) */
+  --borda: calc(40 * var(--u));
+}
+.hero__painel {
+  position: relative;
+  height: 100%;
+  border-radius: 32px;
+  overflow: clip;
+  isolation: isolate;
+  background: radial-gradient(86% 78% at 50% 40%, var(--painel-luz) 0%, var(--painel-luz) 18%, var(--painel) 100%);
+}
+
+/* a foto, o nome e a névoa dividem a mesma caixa (a da foto): pé do painel, no meio */
+.hero__foto, .hero__nome, .hero__nevoa {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--foto-w);
+  max-width: none;
+  height: var(--foto-h);
+  margin-left: calc(var(--foto-w) / -2);
+}
+.hero__foto, .hero__nevoa { bottom: calc(var(--foto-desce) * -1); }
+.hero__foto { z-index: 2; object-fit: cover; }
+.hero__nevoa {
+  z-index: 3;
+  background: var(--hero-nevoa) center / 100% 100% no-repeat;
+  filter: blur(calc(16 * var(--u)));
+  mix-blend-mode: multiply;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero__nome {
+  z-index: 1;
+  color: var(--tinta);
+  font-size: var(--corpo-nome);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+}
+.hero__metade { position: absolute; bottom: var(--nome-pe); display: block; }
+/* As duas metades têm a mesma largura de tinta: "To" e "na" saem da fonte com poucos por cento de diferença, e o
+   espaço entre as letras fecha a conta (--marca-esp, medido em cada fonte; metade para cada lado). As margens
+   descontam o que a tinta de cada metade sobra ou falta junto do miolo. */
+.hero__metade--a { right: calc(50% + var(--miolo) / 2); letter-spacing: calc(var(--marca-esp) * 1em); margin-right: calc((var(--marca-fim-a) - var(--marca-esp)) * 1em); }
+.hero__metade--b { left: calc(50% + var(--miolo) / 2); letter-spacing: calc(var(--marca-esp) * -1em); margin-left: calc(var(--marca-ini-b) * 1em); }
+/* com entrelinha 1, a caixa da linha desce --marca-desce abaixo da linha de base: a margem devolve, e o pé da
+   metade passa a ser a linha de base, que é o que --nome-pe mede */
+.hero__letras { display: block; line-height: 1; margin-bottom: calc(var(--marca-desce) * -1em); }
+
+/* os textos */
+.hero__h1 {
+  position: absolute;
+  z-index: 4;
+  left: var(--borda);
+  top: calc(118 * var(--u));
+  width: max(250px, calc(330 * var(--u)));
+  font-size: max(19px, calc(27 * var(--u)));
+  line-height: 1.16;
+  font-weight: 420;
+  letter-spacing: -0.03em;
+}
+.hero__pe {
+  position: absolute;
+  z-index: 4;
+  left: var(--borda);
+  bottom: var(--borda);
+  /* nunca passa do ombro dela: metade do painel menos a meia largura dos ombros */
+  width: min(max(300px, calc(348 * var(--u))), calc(50% - 338 * var(--u) - var(--borda) - 12px));
+}
+.hero__p { font-size: max(15px, calc(17 * var(--u))); line-height: 1.5; letter-spacing: -0.01em; color: rgb(var(--tinta-rgb) / 0.68); }
+.hero__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: max(18px, calc(24 * var(--u))); }
+.hero__link { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.hero__prova { margin-top: 16px; color: rgb(var(--tinta-rgb) / 0.6); text-wrap: balance; }
+.hero__prova strong { font-weight: 600; color: var(--tinta); }
+.hero__prova span { white-space: nowrap; }
+
+/* o card pousado no ombro: o mesmo vidro fosco, leitoso e neutro, desfocando o que passa por trás (o ombro dela, o
+   painel). A letra é a tinta, como em todo vidro do site; um fio de luz por dentro faz a borda. */
+.hero__card {
+  position: absolute;
+  z-index: 4;
+  right: var(--borda);
+  bottom: var(--borda);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  width: max(336px, calc(392 * var(--u)));
+  padding: 12px 14px 12px 12px;
+  border-radius: 26px;
+  color: var(--tinta);
+  background: rgb(from var(--vidro) r g b / 0.5);
+  -webkit-backdrop-filter: blur(26px) saturate(1.6);
+  backdrop-filter: blur(26px) saturate(1.6);
+  box-shadow: inset 0 0 0 1px rgb(var(--claro-rgb) / 0.6), 0 24px 60px -28px rgb(var(--tinta-rgb) / 0.4);
+  transition: transform var(--dur-m) var(--out), box-shadow var(--dur-m) var(--out);
+}
+.hero__card .etiqueta { border-color: rgb(var(--tinta-rgb) / 0.3); color: var(--tinta); }
+.hero__card .mais { background: var(--cta); color: var(--sobre-cta); }
+.hero__card-foto { display: block; width: 92px; height: 92px; border-radius: 16px; overflow: clip; background: var(--pele-2); }
+.hero__card-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transition: transform var(--dur-l) var(--out); }
+.hero__card-txt { display: grid; gap: 4px; min-width: 0; }
+.hero__card-tags { display: flex; gap: 6px; margin-bottom: 4px; }
+.hero__card-nome { font-size: 19px; line-height: 1.2; font-weight: 500; letter-spacing: -0.022em; }
+.hero__card-meta { font-size: 14px; color: rgb(var(--tinta-rgb) / 0.7); }
+:where(html:not(.is-scrolling):not(.toque)) .hero__card:hover,
+.hero__card.is-tocado { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgb(var(--claro-rgb) / 0.6), 0 34px 70px -28px rgb(var(--tinta-rgb) / 0.5); }
+:where(html:not(.is-scrolling):not(.toque)) .hero__card:hover .hero__card-foto img,
+.hero__card.is-tocado .hero__card-foto img { transform: scale(1.07); }
+.hero__card:active { transform: scale(0.985); }
+.hero__card:focus-visible { outline-offset: 4px; border-radius: 26px; }
+
+/* antes da abertura: a foto e o nome ainda não chegaram, só a névoa. Sem JS (ou sem movimento) tudo já está no lugar. */
+.js .hero:not(.is-aberto) :is(.hero__foto, .hero__nome) { opacity: 0; }
+.js .hero:not(.is-aberto) .hero__nevoa { opacity: 1; }
+.js .hero:not(.is-aberto) :is([data-hero]) { opacity: 0; }
+
+/* Janela estreita de computador ou tablet deitado: o bloco do pé fica só com o essencial, para caber abaixo das letras */
+@media (min-width: 900px) and (max-width: 1180px) {
+  .hero__link, .hero__nota { display: none; }
+}
+
+/* Celular: outra composição. O nome fica inteiro, de ponta a ponta, logo acima da cabeça (ela cobre o pé das
+   letras); a frase de apresentação se apoia nele; o texto e o botão moram numa faixa de névoa no pé do painel.
+   A foto cresce com a altura da tela (60% dela), então tudo se acerta sozinho de 553 a 932 px de altura. */
+@media (max-width: 899px) {
+  .hero {
+    padding: 8px 8px 12px;
+    min-height: 520px;
+    --borda: 18px;
+    --foto-h: min(calc(470 * var(--u)), 56svh);
+    --foto-desce: 0px;
+    --corpo-nome: calc(131 * var(--u) * var(--marca-ajuste));
+    --nome-pe: calc(var(--foto-h) * 0.91 - 24 * var(--u)); /* a linha de base: um pouco abaixo do alto do cabelo */
+    --p-alt: 58px; /* a altura do parágrafo, que no celular mora entre o título e o nome */
+  }
+  .hero__painel { border-radius: 24px; }
+  .hero__nome { display: flex; justify-content: center; align-items: flex-end; padding-bottom: var(--nome-pe); }
+  .hero__metade { position: static; margin: 0; letter-spacing: 0; }
+  .hero__h1 {
+    top: auto;
+    bottom: calc(var(--nome-pe) + var(--corpo-nome) * 0.69 + 18px + var(--p-alt));
+    width: auto;
+    right: var(--borda);
+    max-width: 13.5em;
+    font-size: calc(25 * var(--u));
+  }
+  .hero__card { display: none; }
+  .hero__pe {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    padding: 66px var(--borda) var(--borda);
+    isolation: isolate;
+  }
+  /* a faixa de vidro: desfoca o que está atrás (o colo dela), com o leite e a geada por cima */
+  .hero__pe::before, .hero__pe::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    --b: 62px;
+    --mascara: linear-gradient(to bottom, rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0.03) calc(var(--b) * 0.1), rgb(0 0 0 / 0.1) calc(var(--b) * 0.2),
+      rgb(0 0 0 / 0.22) calc(var(--b) * 0.3), rgb(0 0 0 / 0.35) calc(var(--b) * 0.4), rgb(0 0 0 / 0.5) calc(var(--b) * 0.5),
+      rgb(0 0 0 / 0.65) calc(var(--b) * 0.6), rgb(0 0 0 / 0.78) calc(var(--b) * 0.7), rgb(0 0 0 / 0.9) calc(var(--b) * 0.8),
+      rgb(0 0 0 / 0.97) calc(var(--b) * 0.9), #000 var(--b));
+    -webkit-mask-image: var(--mascara);
+    mask-image: var(--mascara);
+    pointer-events: none;
+  }
+  .hero__pe::before {
+    background: rgb(from var(--vidro) r g b / calc(var(--veu) * 0.8));
+    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
+  }
+  .hero__pe::after { background: url('/img/grao.png') 0 0 / var(--grao-tam) var(--grao-tam); opacity: var(--grao); }
+  /* o parágrafo sobe para junto do título (a faixa de vidro do pé fica só com o botão e a linha de prova, e os
+     ombros dela aparecem) */
+  .hero__p {
+    position: absolute;
+    left: var(--borda);
+    right: var(--borda);
+    bottom: calc(var(--nome-pe) + var(--corpo-nome) * 0.69 + 16px);
+    max-width: 22em;
+    font-size: 15px;
+    line-height: 1.45;
+    color: rgb(var(--tinta-rgb) / 0.7);
+  }
+  .hero__acoes { margin-top: 0; gap: 10px 20px; }
+  .hero__acoes .botao { flex: 1 1 auto; justify-content: space-between; }
+  .hero__link { display: none; }
+  .hero__prova { margin-top: 12px; }
+}
+/* tela baixa (iPhone pequeno com as barras do Safari): sai o parágrafo, ficam o botão e a linha de prova */
+@media (max-width: 899px) and (max-height: 700px) {
+  .hero { --p-alt: 0px; }
+  .hero__p { display: none; }
+}
+
+/* profundidade: --afunda (0 a 1, a página descendo) e --px / --py (-0,5 a 0,5, o cursor) */
+.hero__metade { transform: translate3d(calc(var(--px, 0) * -22 * var(--u)), calc(var(--afunda, 0) * 90 * var(--u) + var(--py, 0) * -12 * var(--u)), 0); }
+@media (max-width: 899px) { .hero__metade { transform: translate3d(0, calc(var(--afunda, 0) * 40 * var(--u)), 0); } }
+.hero__foto { transform: translate3d(calc(var(--px, 0) * 8 * var(--u)), calc(var(--py, 0) * 5 * var(--u)), 0); }
+.hero__nome { transform: translate3d(calc(var(--px, 0) * 8 * var(--u)), calc(var(--py, 0) * 5 * var(--u)), 0); }

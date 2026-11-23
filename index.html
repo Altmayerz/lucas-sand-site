@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lucas Sand | DJ Open Format e Eventos</title>
+  <meta name="description" content="DJ Lucas Sand: Open Format, remixes exclusivos e experiências musicais para 15 anos, formaturas, casamentos e eventos.">
+  <meta name="theme-color" content="#170610">
+  <link rel="icon" href="/marca.svg" type="image/svg+xml">
+  <!-- primeira pintura: o fundo já na cor certa e o hero no lugar, com a névoa da foto. A folha do site vem em <link>
+       (segura a pintura até chegar), nunca pelo JS. O que entra por marco só se esconde com o JS no ar (classe .js);
+       se ele não subir em 4 s, a trava cai e a página aparece inteira.
+       ?tema= pele (padrão), rosa, oliva, noite -->
+  <script>
+    (function () {
+      var d = document.documentElement, q = new URLSearchParams(location.search);
+      d.classList.add('js');
+      var tema = q.get('tema');
+      if (tema && /^(rosa|oliva|noite)$/.test(tema)) d.dataset.tema = tema;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduzido');
+      if (matchMedia('(hover: none)').matches) d.classList.add('toque');
+      setTimeout(function () { if (!window.__tonaViva) d.classList.remove('js'); }, 4000);
+    })();
+  </script>
+  <style>
+    html { background: #170610; color: #fff3f6; }
+    body { margin: 0; }
+    html:not(.assentou) *, html:not(.assentou) *::before, html:not(.assentou) *::after { transition: none !important; }
+  </style>
+  <!-- as duas fontes da primeira tela chegam junto com a folha, para a marca não piscar em outra letra -->
+  <link rel="preload" href="/node_modules/@fontsource/shrikhand/files/shrikhand-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/styles/site.css">
+</head>
+<body>
+  <a class="pular" href="#manifesto">Pular para o conteúdo</a>
+
+  <!-- @secao topo -->
+
+  <main>
+    <!-- @secao hero -->
+
+    <!-- @secao manifesto -->
+
+    <!-- @secao bento -->
+
+    <!-- @secao tratamentos -->
+
+    <!-- @secao madura -->
+
+    <!-- @secao clinica -->
+<section class="secao" id="mesa"><div class="miolo"><header class="cab"><h2 class="titulo" data-palavras>Sua vez na <span class="marca-letra">cabine.</span></h2><p class="corpo" data-entra>Misture dois ritmos, ajuste o som e experimente os efeitos. Aperte Play para começar.</p></header><iframe title="Mesa de DJ interativa Lucas Sand" src="/mixer.html#mesa" loading="lazy" class="mesa__iframe" style="width:100%;height:660px;border:0;border-radius:24px;background:#18050f" allow="autoplay"></iframe></div></section>
+
+    <!-- @secao equipe -->
+
+
+
+    <!-- @secao agendar -->
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

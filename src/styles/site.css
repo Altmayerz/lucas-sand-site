@@ -1,0 +1,24 @@
+/* Folha única do site, ligada no <head> do index.html (segura a primeira pintura até chegar). Importada pelo JS, no
+   dev do Vite ela só entraria depois dos módulos e a página apareceria crua por um instante. */
+@import '@fontsource/shrikhand/latin-400.css';
+@import '@fontsource/shrikhand/latin-ext-400.css';
+@import '@fontsource-variable/dm-sans/opsz.css';
+@import './gerado.css';
+@import './tokens.css';
+@import './base.css';
+@import './topo.css';
+@import './hero.css';
+@import './manifesto.css';
+@import './bento.css';
+@import './tratamentos.css';
+@import './madura.css';
+@import './clinica.css';
+@import './equipe.css';
+@import './duvidas.css';
+@import './agendar.css';
+
+@import url('./lucas.css');
+
+@import './v4.css';
+
+@import "./v5.css";

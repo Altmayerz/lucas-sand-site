@@ -1,0 +1,53 @@
+
+:root{--fundo:#170610;--painel:#2a0a19;--painel-luz:#3a1025;--superficie:#2b0d1c;--tinta:#fff3f6;--tinta-rgb:255 243 246;--claro:#ffffff;--pele-1:#e9a1b9;--pele-2:#ca648d;--pele-3:#a92f60;--pele-3-rgb:169 47 96;--pele-4:#781c42;--pele-5:#2c0719;--bloco:#7a173e;--bloco-rgb:122 23 62;--cta:#ffb3ce;--sobre-cta:#2b0617;--marca:'DM Sans Variable',Arial,sans-serif;--marca-peso:900;--marca-estilo:normal;--marca-ajuste:.65}
+body{background:#170610;color:#fff3f6} .hero__painel{background:radial-gradient(ellipse at 50% 35%,#4c1632,#1e0714 75%)!important} .hero__nome,.agendar__nome{font-family:var(--marca)!important;font-weight:900!important;letter-spacing:-.09em!important} .hero__letras{font-size:.69em!important} .hero__foto{object-fit:contain!important} .hero__h1{color:#fff!important;text-shadow:0 2px 18px #230411} .hero__p,.hero__prova{color:#fff!important} .hero__card{background:rgba(255,236,245,.8)!important;color:#230514!important} .topo__marca,.rodape__marca{font-family:var(--marca)!important;font-weight:900!important;letter-spacing:-.06em} .foto__sobre{color:#fff} .agendar__cartao{color:#210711} .agendar__bloco{background:#7a173e!important} .agendar__mulher{object-fit:contain!important} .trat__lista{color:#fff3f6} .trat__linha{color:inherit} .madura__painel{background:#1e0714} .titulo .marca-letra{font-weight:900} .hero__nome{opacity:.75} .duvidas__item{border-color:#ffffff40} .secao{scroll-margin-top:90px} iframe{display:block} @media(max-width:700px){#mesa iframe{height:1150px!important}.hero__letras{font-size:.7em!important}.hero__nome{opacity:.65}}
+
+/* V2 — contraste da seção de orçamento: cartão vinho com texto legível */
+.agendar__cartao { background:#210914 !important; color:#fff5f8 !important; }
+.agendar__cartao .agendar__titulo,
+.agendar__cartao .agendar__chamada .corpo,
+.agendar__cartao .agendar__dados dd,
+.agendar__cartao .agendar__dados dd a { color:#fff5f8 !important; }
+.agendar__cartao .agendar__dados dt,
+.agendar__cartao .agendar__acoes .pequeno { color:#f3cbdc !important; }
+.agendar__cartao .agendar__dados > div { border-top-color:rgba(255,245,248,.23) !important; }
+.agendar__cartao .agendar__dados a:focus-visible { outline:2px solid #ffb6d1; outline-offset:3px; }
+
+/* V3: editorial de eventos e mesa integrada */
+.manifesto__pe{display:none!important}
+#mesa{padding-top:clamp(38px,5vw,78px);padding-bottom:clamp(40px,6vw,90px)}
+#mesa .cab{margin-bottom:clamp(24px,3vw,44px)}
+#mesa .mesa__iframe{display:block;width:100%;height:660px;border-radius:22px;background:#18050f}
+.madura__painel{position:relative;isolation:isolate;overflow:hidden}
+.madura__painel>img:first-of-type{object-fit:cover!important;object-position:44% 34%!important;filter:brightness(.78)!important}
+.madura__painel::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent 0%,rgba(18,3,15,.12) 39%,rgba(18,3,15,.84) 100%)}
+.madura__sobre{position:absolute!important;inset:0!important;z-index:2!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-end!important;padding:clamp(24px,5vw,90px)!important}
+.madura__num{font-size:clamp(44px,7vw,118px)!important;line-height:.92!important;max-width:54%!important;white-space:normal!important;overflow-wrap:normal!important;letter-spacing:-.065em!important;text-align:right!important;margin:0 0 26px!important;color:#fff!important}
+.madura__txt{width:min(480px,49%)!important;max-width:none!important;gap:14px!important;color:#fff!important}
+.madura__titulo{font-size:clamp(26px,3vw,44px)!important;color:#fff!important}
+.madura__p{font-size:clamp(15px,1.25vw,18px)!important;color:#fff!important}
+.madura__txt .botao{color:#250816!important;background:#ffb3ce!important}
+.trat__cards{min-width:0;overflow:hidden}
+.trat__card{overflow:hidden!important}
+.trat__card>img:first-of-type{width:100%!important;height:100%!important;object-fit:cover!important;object-position:var(--foco,50% 50%)!important;max-width:none!important}
+.trat__card .trat__area{font-size:clamp(17px,2.2vw,34px)!important;overflow-wrap:anywhere!important;max-width:100%!important;line-height:1.07!important}
+.trat__card:not(.is-ativo) .trat__area{transform:none!important;font-size:clamp(15px,1.5vw,22px)!important}
+.trat__rotulo{padding:clamp(12px,1.3vw,22px)!important}
+.trat__linha{gap:8px!important;grid-template-columns:minmax(0,1fr) auto 22px!important}
+.trat__meta{display:none!important}
+.trat__nome{font-size:clamp(13px,1.2vw,17px)!important}
+@media(max-width:899px){
+#mesa .mesa__iframe{height:1120px!important}
+.madura__painel{min-height:570px!important;aspect-ratio:auto!important}
+.madura__painel>img:first-of-type{height:100%!important;object-position:40% 22%!important;mask-image:none!important;-webkit-mask-image:none!important}
+.madura__painel::after{background:linear-gradient(180deg,rgba(15,2,12,.05),rgba(15,2,12,.24) 30%,rgba(15,2,12,.93) 100%)}
+.madura__sobre{justify-content:flex-end!important;align-items:flex-start!important;padding:24px!important;gap:18px!important}
+.madura__num{font-size:clamp(45px,11vw,78px)!important;max-width:100%!important;text-align:left!important;margin:0!important}
+.madura__txt{width:100%!important}
+.trat__card .trat__area{font-size:clamp(14px,3.8vw,24px)!important}
+.trat__card:not(.is-ativo) .trat__area{font-size:clamp(13px,3.4vw,20px)!important}
+}
+@media(max-width:500px){#mesa .mesa__iframe{height:1350px!important}.trat__cards{gap:6px!important}.trat__rotulo{padding:10px!important}.trat__card .trat__area{font-size:14px!important}.trat__card:not(.is-ativo) .trat__area{font-size:12px!important}}
+
+/* Fotografias reais em vez de fotos da clínica */
+.equipe__card>img:first-of-type,.clinica__item .foto>img:first-of-type{width:100%;height:100%;object-fit:cover;object-position:center 32%}

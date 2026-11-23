@@ -1,0 +1,43 @@
+/* Pele madura: um painel de foto de borda a borda, com o número gigante na letra da marca e o texto direto na parede
+   da foto. Aqui não há vidro: a névoa só passa na chegada (como em toda foto) e vai embora. */
+.madura { padding: calc(var(--secao) / 2) 12px; }
+.madura__painel {
+  height: min(calc(100svh - 24px), calc(720 * var(--su)));
+  min-height: 540px;
+  border-radius: 32px;
+  --parede: #8b7a66; /* o tom da parede da foto: no celular a foto se desfaz nele e o texto mora ali */
+  background: var(--parede);
+}
+/* a foto entra um pouco mais fechada, para a letra branca ler na parede */
+.madura__painel > img:first-of-type { filter: brightness(0.9); }
+.madura__sobre {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(52 * var(--su)) max(calc(52 * var(--su)), calc((100vw - 24px - var(--largura)) / 2));
+}
+.madura__num { font-size: calc(290 * var(--su)); line-height: 0.8; margin: 0 0 calc(28 * var(--su)) -0.03em; white-space: nowrap; }
+.madura__num span { font-size: 0.62em; vertical-align: 0.42em; margin-left: 0.04em; }
+.madura__txt { display: grid; gap: calc(18 * var(--su)); justify-items: start; max-width: calc(560 * var(--su)); }
+.madura__titulo { font-size: calc(46 * var(--su)); line-height: 1.06; font-weight: 500; letter-spacing: -0.036em; text-wrap: balance; }
+.madura__p { font-size: calc(18 * var(--su)); line-height: 1.5; font-weight: 450; max-width: 44ch; }
+.madura__txt .botao { margin-top: 6px; }
+
+@media (max-width: 899px) {
+  .madura { padding: calc(var(--secao) / 2) 8px; }
+  .madura__painel { height: auto; min-height: 0; aspect-ratio: 390 / 640; border-radius: 24px; }
+  /* no celular o rosto dela toma o quadro: o número sobe para o canto (em cima da parede) e a foto se desfaz na cor
+     da parede antes do texto, que mora nela */
+  .madura__painel > img:first-of-type {
+    height: 68%;
+    object-position: 82% 20%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+  }
+  .madura__painel .nevoa { display: none; }
+  .madura__sobre { padding: 22px 18px; justify-content: space-between; }
+  .madura__num { font-size: 112px; margin: 6px 0 0 -0.03em; }
+  .madura__titulo { font-size: 30px; }
+  .madura__p { font-size: 16px; }
+  .madura__txt { gap: 12px; }
+}

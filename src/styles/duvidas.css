@@ -1,0 +1,48 @@
+/* Dúvidas: o título e a chamada à esquerda, presos enquanto a lista passa; as respostas abrem saindo do desfoque. */
+.duvidas__miolo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(64 * var(--su)); align-items: start; }
+.duvidas__cab { position: sticky; top: calc(110 * var(--su)); display: grid; gap: calc(20 * var(--su)); justify-items: start; }
+.duvidas__cab .corpo { max-width: 34ch; }
+.duvidas__link { font-size: 16px; font-weight: 500; letter-spacing: -0.012em; margin-top: 4px; }
+.duvida { border-top: 1px solid rgb(var(--tinta-rgb) / 0.13); }
+.duvida:last-child { border-bottom: 1px solid rgb(var(--tinta-rgb) / 0.13); }
+.duvida__p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: calc(22 * var(--su)) 4px;
+  text-align: left;
+  font-size: calc(20 * var(--su));
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
+}
+.duvida__p .mais { background: var(--superficie); }
+.duvida__p[aria-expanded='true'] .mais { background: var(--tinta); color: var(--claro); }
+.duvida__p[aria-expanded='true'] .mais svg { transform: rotate(135deg); }
+.duvida__p:focus-visible { outline-offset: -2px; border-radius: 12px; }
+/* a resposta abre pela altura (linha de grade de 0 a 1) e o texto sai do desfoque; sem JS, todas ficam abertas */
+.duvida__r { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.7s var(--out); }
+.duvida__r > div { overflow: hidden; min-height: 0; }
+.duvida__r p {
+  padding: 0 calc(72 * var(--su)) calc(26 * var(--su)) 4px;
+  font-size: calc(17 * var(--su));
+  line-height: 1.6;
+  color: rgb(var(--tinta-rgb) / 0.68);
+  transition: opacity 0.7s var(--out) 0.12s, filter 0.8s var(--out) 0.12s, transform 0.9s var(--out) 0.08s;
+}
+.js .duvida:not(.is-aberta) .duvida__r { grid-template-rows: 0fr; }
+.js .duvida:not(.is-aberta) .duvida__r p {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(0, -8px, 0);
+  transition: opacity 0.35s var(--out), filter 0.35s var(--out), transform 0.5s var(--out);
+}
+
+@media (max-width: 899px) {
+  .duvidas__miolo { grid-template-columns: 1fr; gap: 28px; }
+  .duvidas__cab { position: static; gap: 14px; }
+  .duvida__p { font-size: 18px; padding: 18px 0; gap: 14px; }
+  .duvida__r p { padding: 0 8px 20px 0; font-size: 16px; }
+}

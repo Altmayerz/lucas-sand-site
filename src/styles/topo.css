@@ -1,0 +1,92 @@
+/* Topo: no alto da página é uma faixa transparente sobre o hero (marca, quatro links, botão). Quando a página
+   desce ele sai da frente; quando sobe, volta como uma cápsula fosca e granulada, que se lê sobre qualquer coisa. */
+.topo { position: fixed; inset: 0 0 auto 0; z-index: 60; pointer-events: none; }
+.topo__barra {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 56px;
+  max-width: calc(100vw - 24px - 2 * (40 * var(--u)) + 16px);
+  margin: calc(12px + 22 * var(--u)) auto 0;
+  padding: 0 6px 0 8px;
+  border-radius: 999px;
+  pointer-events: auto;
+  isolation: isolate;
+  transition: transform 0.6s var(--out), max-width 0.7s var(--out), margin-top 0.7s var(--out);
+}
+.topo__barra::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgb(from var(--fundo) r g b / 0.66);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  backdrop-filter: blur(22px) saturate(1.5);
+  box-shadow: 0 1px 2px rgb(var(--tinta-rgb) / 0.06), 0 14px 34px -14px rgb(var(--tinta-rgb) / 0.22);
+  opacity: 0;
+  transition: opacity 0.5s var(--out);
+}
+.topo.is-solto .topo__barra { max-width: 760px; margin-top: 14px; }
+.topo.is-solto .topo__barra::before { opacity: 1; }
+.topo.is-fora .topo__barra { transform: translateY(calc(-100% - 40px)); }
+
+.topo__marca { font-size: 31px; line-height: 1; padding: 6px 10px 8px; color: var(--tinta); border-radius: 999px; transition: transform var(--dur-s) var(--out); }
+:where(html:not(.is-scrolling):not(.toque)) .topo__marca:hover { transform: rotate(-4deg) scale(1.04); }
+.topo__marca:active { transform: scale(0.95); }
+.topo__menu { display: flex; align-items: center; gap: 2px; }
+.topo__link { position: relative; padding: 9px 15px; border-radius: 999px; font-size: 15px; font-weight: 450; letter-spacing: -0.012em; color: var(--tinta); isolation: isolate; }
+.topo__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgb(var(--tinta-rgb) / 0.07);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--dur-s) var(--out), transform var(--dur-s) var(--out);
+}
+:where(html:not(.is-scrolling):not(.toque)) .topo__link:hover::before,
+.topo__link:focus-visible::before,
+.topo__link.is-tocado::before,
+.topo__link[aria-current='true']::before { opacity: 1; transform: none; }
+.topo__link:active span { display: inline-block; transform: scale(0.96); }
+
+/* celular: marca, botão e o menu em dois traços */
+.topo__abre { position: relative; width: 44px; height: 44px; border-radius: 50%; background: var(--claro); box-shadow: 0 1px 2px rgb(var(--tinta-rgb) / 0.06), 0 8px 20px -8px rgb(var(--tinta-rgb) / 0.2); flex: none; }
+.topo__abre span { position: absolute; left: 14px; right: 14px; height: 1.6px; border-radius: 2px; background: var(--tinta); transition: transform 0.5s var(--out); }
+.topo__abre span:nth-child(1) { top: 18px; }
+.topo__abre span:nth-child(2) { top: 25px; }
+.topo__abre[aria-expanded='true'] span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+.topo__abre[aria-expanded='true'] span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+.topo__abre:active { transform: scale(0.94); }
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  align-content: center;
+  padding: 96px 28px 40px;
+  background: rgb(from var(--fundo) r g b / 0.82);
+  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+  backdrop-filter: blur(30px) saturate(1.4);
+  opacity: 0;
+  transition: opacity 0.45s var(--out);
+}
+.menu[hidden] { display: none; }
+.menu.is-aberto { opacity: 1; }
+.menu__lista { display: grid; gap: 6px; }
+.menu__link { font-size: 40px; line-height: 1.12; font-weight: 500; letter-spacing: -0.04em; padding: 6px 0; opacity: 0; transform: translateY(18px); transition: opacity 0.5s var(--out), transform 0.7s var(--out); transition-delay: calc(var(--i, 0) * 0.05s); }
+.menu__link.marca-letra { font-size: 46px; letter-spacing: 0; color: var(--pele-4); margin-top: 14px; font-weight: var(--marca-peso); }
+.menu.is-aberto .menu__link { opacity: 1; transform: none; }
+.menu__link:active { opacity: 0.6; }
+
+@media (max-width: 899px) {
+  .topo__barra { height: 52px; max-width: none; margin: 18px 18px 0; padding: 0; gap: 8px; }
+  .topo.is-solto .topo__barra { max-width: none; margin-top: 10px; padding: 0 4px 0 8px; margin-left: 10px; margin-right: 10px; }
+  .topo__marca { font-size: 28px; margin-right: auto; }
+}

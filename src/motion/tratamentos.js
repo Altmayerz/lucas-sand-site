@@ -1,0 +1,1 @@
+export function tratamentos() { const cards = [...document.querySelectorAll('.trat__cards .trat__card')]; cards.forEach((card,i)=>{card.addEventListener('click',()=>{cards.forEach((c,j)=>{c.classList.toggle('is-ativo',i===j);c.setAttribute('aria-pressed',String(i===j));});});card.setAttribute('aria-pressed',String(card.classList.contains('is-ativo')));}); }

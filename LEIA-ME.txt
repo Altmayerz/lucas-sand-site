@@ -1,0 +1,10 @@
+NOVO SITE LUCAS SAND — BASE ORIGINAL TONA
+
+1. Abra o terminal nesta pasta.
+2. npm install
+3. npm run dev
+4. Abra o endereco local mostrado.
+
+Para publicar: npm run build e envie a pasta dist para Netlify.
+
+Este e um primeiro prototipo completo para avaliacao visual e funcional.

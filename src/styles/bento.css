@@ -1,0 +1,52 @@
+/* Bento: fotos de borda a borda, sem contorno, com a letra da marca em branco por cima, e um cartão de cor. */
+.bento__grade {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: calc(336 * var(--su));
+  gap: var(--vao);
+}
+.bento__a { grid-column: 1 / span 4; grid-row: 1 / span 2; }
+.bento__b { grid-column: 5 / span 5; }
+.bento__c { grid-column: 10 / span 3; }
+.bento__d { grid-column: 5 / span 3; }
+.bento__e { grid-column: 8 / span 5; }
+
+.nota {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: calc(24 * var(--su));
+  border-radius: var(--raio);
+  background: var(--bloco);
+  color: var(--claro);
+  isolation: isolate;
+  overflow: clip;
+}
+.nota::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/img/grao.png') 0 0 / var(--grao-tam) var(--grao-tam);
+  opacity: var(--grao-bloco);
+}
+.nota__num { font-size: calc(88 * var(--su)); line-height: 0.9; }
+.nota__de { font-size: 14px; opacity: 0.86; margin-top: 10px; }
+.nota__frase { margin: auto 0 0; font-size: calc(19 * var(--su)); line-height: 1.32; letter-spacing: -0.018em; }
+.nota__quem { font-size: 14px; opacity: 0.8; margin-top: 10px; }
+
+/* celular: o protocolo e o viço na largura toda, os dois recortes lado a lado e a nota embaixo */
+@media (max-width: 899px) {
+  .bento__grade { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .bento__a { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 1 / 1.06; }
+  .bento__a .cartao__desc { display: none; } /* no celular o card fica com o nome, o tempo, o preço e o botão */
+  .bento__b { grid-column: 1 / -1; aspect-ratio: 16 / 13.2; }
+  .bento__d { grid-column: 1; grid-row: 3; aspect-ratio: 1 / 1.3; }
+  .bento__e { grid-column: 2; grid-row: 3; aspect-ratio: 1 / 1.3; }
+  .bento__c { grid-column: 1 / -1; grid-row: 4; padding: 20px; }
+  .bento__d .palavra__nome, .bento__e .palavra__nome { font-size: 32px; margin-bottom: 30px; }
+  .bento__d .palavra__txt, .bento__e .palavra__txt { font-size: 13px; line-height: 1.4; }
+  .bento__d .palavra, .bento__e .palavra { padding: 14px; }
+  .nota__num { font-size: 64px; }
+  .nota__frase { font-size: 18px; margin-top: 20px; }
+}

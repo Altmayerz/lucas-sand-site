@@ -1,0 +1,12 @@
+.sobre-v5{background:#10070c;color:#fff4f6;padding-block:clamp(65px,8vw,125px)}
+.sobre-v5 .miolo{max-width:1160px}
+.sobre-v5__titulo{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(58px,8vw,116px);font-weight:900;letter-spacing:-.035em;line-height:1;margin:0 0 34px}
+.sobre-v5__texto{max-width:930px}
+.sobre-v5__texto p{font-size:clamp(17px,1.6vw,22px);line-height:1.5;margin:0 0 1.25em;color:#f5eef1}
+.sobre-v5__texto strong{font-weight:750;color:#fff}
+.trat__card>img:first-of-type{width:100%;height:100%;object-fit:cover;object-position:var(--foco,center);}
+.trat__card .nevoa{display:none}
+.trat__card:nth-child(1){--foco:50% 48%!important}
+.trat__card:nth-child(2){--foco:50% 56%!important}
+.trat__card:nth-child(3){--foco:50% 53%!important}
+@media(max-width:650px){.sobre-v5__texto p{font-size:16px;line-height:1.6}.sobre-v5__titulo{font-size:clamp(52px,14vw,78px)}}

@@ -1,0 +1,17 @@
+/* A clínica: uma janela da largura do conteúdo com uma fila de fotos que anda de lado enquanto a página desce.
+   No celular a fila vai de borda a borda e se arrasta com o dedo. */
+.clinica__janela { max-width: var(--largura); margin: 0 auto; overflow: clip; border-radius: var(--raio); }
+.clinica__trilho { display: flex; gap: var(--vao); width: max-content; transform: translate3d(calc(var(--desliza, 0) * 1px), 0, 0); will-change: transform; }
+.clinica__item .foto { height: calc(430 * var(--su)); }
+.clinica__item--l .foto { width: calc(640 * var(--su)); }
+.clinica__item--p .foto { width: calc(340 * var(--su)); }
+.clinica__item figcaption { margin-top: 12px; font-size: 14px; color: rgb(var(--tinta-rgb) / 0.62); }
+
+@media (max-width: 899px) {
+  .clinica__janela { max-width: none; margin: 0 calc(var(--ms) * -1); padding: 0 var(--ms); border-radius: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  .clinica__janela::-webkit-scrollbar { display: none; }
+  .clinica__trilho { transform: none; padding-right: var(--ms); }
+  .clinica__item .foto { height: 300px; }
+  .clinica__item--l .foto { width: 82vw; }
+  .clinica__item--p .foto { width: 62vw; }
+}

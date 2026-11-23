@@ -1,0 +1,22 @@
+/* Equipe: três fichas de pessoa, a foto de borda a borda e o texto na névoa do pé. */
+.equipe__grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--vao); }
+.equipe__card { aspect-ratio: 4 / 5.4; --pe: 48; --nevoa-borda: 104px; }
+.equipe__card > img:first-of-type { transition: transform 1.6s var(--out); }
+:where(html:not(.is-scrolling):not(.toque)) .equipe__card:hover > img:first-of-type { transform: scale(1.03); }
+
+/* celular: as três fichas numa fila que se arrasta com o dedo */
+@media (max-width: 899px) {
+  .equipe__grade {
+    display: flex;
+    gap: var(--vao);
+    margin: 0 calc(var(--ms) * -1);
+    padding: 0 var(--ms);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .equipe__grade::-webkit-scrollbar { display: none; }
+  .equipe__card { flex: 0 0 78vw; aspect-ratio: 4 / 5.8; --pe: 36; }
+}

@@ -1,0 +1,62 @@
+/* Manifesto: a frase da casa no eixo da página, com três recortes de foto dentro do texto. Atrás, a palavra gigante
+   quase invisível, que anda de lado com a rolagem. */
+.manifesto { overflow: clip; padding-top: calc(var(--secao) * 0.85); }
+.manifesto__fundo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--secao) * 0.28);
+  z-index: 0;
+  font-size: calc(430 * var(--su));
+  line-height: 1;
+  white-space: nowrap;
+  color: rgb(var(--tinta-rgb) / 0.04);
+  pointer-events: none;
+  user-select: none;
+}
+.manifesto__fundo span { display: inline-block; padding-left: 6vw; transform: translate3d(calc(var(--desliza, 0) * 1px), 0, 0); will-change: transform; }
+.manifesto .miolo { position: relative; z-index: 1; }
+.manifesto__frase {
+  max-width: 1060px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: calc(54 * var(--su));
+  line-height: 1.16;
+  font-weight: 450;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+.manifesto__marca { font-size: 0.94em; letter-spacing: -0.01em; color: var(--pele-4); white-space: nowrap; }
+.chip {
+  display: inline-block;
+  width: 1.52em;
+  height: 0.82em;
+  margin: 0 0.06em;
+  border-radius: 999px;
+  overflow: clip;
+  vertical-align: -0.08em;
+  background: var(--pele-1);
+}
+.chip img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; }
+.js [data-palavras] .chip { opacity: 0; transform: scale(0.6) rotate(-8deg); }
+.js [data-palavras].entrou .chip { opacity: 1; transform: none; transition: opacity 0.6s var(--out), transform 1.1s var(--out); transition-delay: calc(var(--atraso, 0s) + var(--i, 0) * 0.045s + 0.1s); }
+html.reduzido [data-palavras] .chip { opacity: 1 !important; transform: none !important; }
+
+.manifesto__pe {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--vao);
+  max-width: 1060px;
+  margin: calc(72 * var(--su)) auto 0;
+}
+.manifesto__pe li { display: grid; align-content: start; gap: 4px; padding-top: 18px; border-top: 1px solid rgb(var(--tinta-rgb) / 0.14); }
+.manifesto__pe strong { font-size: calc(19 * var(--su)); font-weight: 500; letter-spacing: -0.02em; }
+.manifesto__pe span { font-size: 15px; line-height: 1.45; color: rgb(var(--tinta-rgb) / 0.62); max-width: 30ch; }
+
+@media (max-width: 899px) {
+  .manifesto__fundo { font-size: 240px; top: 40px; }
+  .manifesto__frase { font-size: 31px; line-height: 1.2; text-align: left; }
+  .manifesto__pe { grid-template-columns: 1fr; gap: 0; margin-top: 40px; }
+  .manifesto__pe li { padding: 16px 0; }
+  .manifesto__pe strong { font-size: 18px; }
+}
