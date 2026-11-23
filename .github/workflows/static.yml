@@ -1,4 +1,4 @@
- name: Publicar site Lucas Sand
+name: Publicar site Lucas Sand
 
 on:
   push:
@@ -31,11 +31,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: npm ci
 
       - name: Compilar site
-        run: npm run build -- --base=/site-lucas-sand/
+        run: npm run build -- --base=/lucas-sand-site/
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
