@@ -1,0 +1,70 @@
+/* Marca oficial e galeria automatica — ajustes isolados */
+.topo__marca{display:flex!important;align-items:center!important;justify-content:center!important;padding:4px 8px!important;flex:0 0 auto!important;max-width:none!important;overflow:visible!important}
+.topo__marca img{display:block;width:94px;height:53px;object-fit:contain;filter:invert(1);max-width:100%}
+@media(max-width:700px){.topo__marca{width:66px!important;padding:2px!important;margin-right:auto!important}.topo__marca img{width:66px;height:48px}}
+@media(max-width:360px){.topo__marca{width:57px!important}.topo__marca img{width:57px;height:43px}}
+.clinica__janela{overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.clinica__janela::-webkit-scrollbar{display:none}
+.clinica__trilho{transform:none!important;will-change:auto!important}
+.clinica__item{scroll-snap-align:start;scroll-snap-stop:always}
+@media(max-width:899px){.clinica__janela{scroll-padding-left:var(--ms)}}
+@media(prefers-reduced-motion:reduce){.clinica__janela{scroll-behavior:auto}}
+
+/* Encerramento em desktop: nome inteiro, centralizado e sem cortes.
+   A composição mobile aprovada permanece intacta. */
+@media (min-width: 900px) {
+  .agendar__nome {
+    inset: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0 !important;
+    padding: 0 clamp(24px, 4vw, 72px) !important;
+    font-size: clamp(64px, 8vw, 132px) !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+  .agendar__metade,
+  .agendar__metade--a,
+  .agendar__metade--b {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    letter-spacing: -.035em !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  .agendar__metade > span {
+    display: block !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+  }
+}
+
+/* Tipografia oficial Lucas/Sand nas duas composicoes com fotografia. */
+.hero__letras.logo-palavra, .agendar__metade > .logo-palavra {
+  display:block!important; width:auto!important; max-width:none!important; height:auto!important;
+  margin:0!important; object-fit:contain;
+}
+.hero__metade, .agendar__metade {letter-spacing:0!important;}
+@media(min-width:900px){
+  .hero__metade {bottom:var(--nome-pe)!important;}
+  .hero__metade--a {right:calc(50% + 85px)!important; margin:0!important;}
+  .hero__metade--b {left:calc(50% + 85px)!important; margin:0!important;}
+  .hero__letras.logo-palavra {width:clamp(210px,29vw,490px)!important;}
+  .agendar__nome {justify-content:space-between!important; gap:clamp(120px,14vw,260px)!important;}
+  .agendar__metade {flex:1 1 0!important; min-width:0!important;}
+  .agendar__metade .logo-palavra {width:100%!important; max-width:100%!important;}
+}
+@media(max-width:899px){
+  .agendar__nome {align-items:center!important;justify-content:flex-start!important;}
+  .agendar__metade {width:100%!important;display:flex!important;justify-content:center!important;}
+  .agendar__metade .logo-palavra {width:min(38vw,180px)!important;max-width:100%!important;}
+  .hero__metade .logo-palavra {width:min(38vw,190px)!important;max-width:100%!important;}
+}

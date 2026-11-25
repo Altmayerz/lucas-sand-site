@@ -7,7 +7,6 @@ import { revelacoes } from './motion/revela.js';
 import { vidros } from './motion/vidro.js';
 import { hero } from './motion/hero.js';
 import { topo } from './motion/topo.js';
-import { tratamentos } from './motion/tratamentos.js';
 import { desliza } from './motion/desliza.js';
 import { zap } from './motion/zap.js';
 import { interacoes } from './motion/interacoes.js';
@@ -25,12 +24,12 @@ function iniciar() {
   palavras();
   const h = hero();
   topo();
-  tratamentos();
   interacoes();
   const d = desliza();
   vidros(document);
   revelacoes(document);
   zap();
+  iniciarCarrosselGaleria();
 
   let largura = innerWidth;
   const remede = () => { lenis?.resize(); ScrollTrigger.refresh(); d.mede(); };
@@ -53,3 +52,35 @@ function iniciar() {
 }
 
 iniciar();
+
+// Galeria: avanca sozinha, permite arrastar e pausa quando fora da tela.
+function iniciarCarrosselGaleria(){
+  const janela=document.querySelector('[data-carrossel]');
+  if(!janela)return;
+  const itens=[...janela.querySelectorAll('.clinica__item')];
+  if(itens.length<2)return;
+  const reduzido=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let atual=0,visivel=false,pausaAte=0;
+  const ir=(i,animado=true)=>{
+    atual=(i+itens.length)%itens.length;
+    const alvo=itens[atual].offsetLeft-itens[0].offsetLeft;
+    janela.scrollTo({left:alvo,behavior:animado&&!reduzido?'smooth':'instant'});
+  };
+  const observador=new IntersectionObserver(([e])=>{visivel=e.isIntersecting},{threshold:.15});
+  observador.observe(janela);
+  const pausar=()=>{pausaAte=Date.now()+6500};
+  janela.addEventListener('pointerdown',pausar,{passive:true});
+  janela.addEventListener('touchstart',pausar,{passive:true});
+  janela.addEventListener('focusin',pausar);
+  janela.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+      e.preventDefault();pausar();ir(atual+(e.key==='ArrowRight'?1:-1));
+    }
+  });
+  janela.addEventListener('scrollend',()=>{
+    const x=janela.scrollLeft;
+    let menor=Infinity;
+    itens.forEach((item,i)=>{const dist=Math.abs(x-(item.offsetLeft-itens[0].offsetLeft));if(dist<menor){menor=dist;atual=i}});
+  });
+  if(!reduzido)setInterval(()=>{if(visivel&&!document.hidden&&Date.now()>pausaAte)ir(atual+1)},3500);
+}
