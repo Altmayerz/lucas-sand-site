@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://djlucassand.com.br/sitemap.xml
