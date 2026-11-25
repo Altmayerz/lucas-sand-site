@@ -17,9 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Baixar arquivos
@@ -34,17 +31,29 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Compilar site
-        run: npm run build -- --base=/lucas-sand-site/
-
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Enviar arquivos compilados
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+      - name: Compilar site
+        run: npm run build -- --base=/lucas-sand-site/
 
+      - name: Enviar arquivos compilados
+        uses: actions/upload-pages-artifact@v4
+        with:
+          name: github-pages
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Publicar site
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
